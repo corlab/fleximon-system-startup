@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function component {
+	$prefix/bin/fleximon-teachin-app
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"
