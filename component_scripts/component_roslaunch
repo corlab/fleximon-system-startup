@@ -6,6 +6,8 @@ export PACKAGE
 export FILENAME
 : ${ROSNODE:="unknown"}
 export ROSNODE
+: ${KILL:=""}
+export KILL
 
 source ~/catkin_ws/devel/setup.bash
 
@@ -13,6 +15,45 @@ export ROS_MASTER_URI=http://localhost:11311
 
 function component {
     roslaunch "${PACKAGE}" "${FILENAME}"
+}
+
+function stop_component {
+    DEFAULT_SIGINT_TIMEOUT=5
+    DEFAULT_SIGTERM_TIMEOUT=5
+
+    # overwrite default values by given arguments.
+
+    SIGINT_TIMEOUT=${2:-${DEFAULT_SIGINT_TIMEOUT}}
+    SIGTERM_TIMEOUT=${3:-${DEFAULT_SIGTERM_TIMEOUT}}
+
+    # Upscale timeouts to optimize return response by minimizing interation step.
+
+    SIGINT_TIMEOUT=`expr $SIGINT_TIMEOUT * 10`
+    SIGTERM_TIMEOUT=`expr $SIGTERM_TIMEOUT * 10`
+
+    # convert floor values to guarantee loop termination.
+
+    SIGINT_TIMEOUT=`printf "%.0f" $SIGINT_TIMEOUT`
+    SIGTERM_TIMEOUT=`printf "%.0f" $SIGTERM_TIMEOUT`
+
+    local PIDS=$(all_children $(vdemo_pidFromScreen $1))
+
+    echo "stop processes $PIDS"
+    kill -SIGINT $PIDS > /dev/null 2>&1
+    for i in {1..$SIGINT_TIMEOUT}; do
+        sleep 0.1
+        kill -0 $PIDS > /dev/null 2>&1 || return
+    done
+
+    echo "terminate processes $PIDS"
+    kill -SIGTERM $PIDS > /dev/null 2>&1
+    for i in {1..$SIGTERM_TIMEOUT}; do
+        sleep 0.1
+        kill -0 $PIDS > /dev/null 2>&1 || return
+    done
+
+    echo "killing processes $PIDS"
+    kill -SIGKILL $PIDS  > /dev/null 2>&1
 }
 
 function on_check {
