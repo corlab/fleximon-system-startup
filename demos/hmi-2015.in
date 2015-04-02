@@ -33,7 +33,7 @@ roscore,${MODULE1},-l -w 10 -c -g robot -L 0:
 roscore,${MODULE2},-l -w 10 -c -g robot -L 0:
 roslaunch,${MODULE1},-t ur5_driver -l -w 10 -g robot -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m1.launch" -v "ROSNODE=/ur_driver":
 roslaunch,${MODULE2},-t ur5_driver -l -w 10 -g robot -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m2.launch" -v "ROSNODE=/ur_driver":
-roslaunch,${MODULE1},-t moveit_planner -l -w 10 -g robot -L 2 -v "PACKAGE=fleximon_moveit_config_m1" -v "FILENAME=ur5_harting_real_m1.launch" -v "ROSNODE/ur5_manipulation":
+roslaunch,${MODULE1},-t moveit_planner -l -w 10 -g robot -L 2 -v "PACKAGE=fleximon_moveit_config_m1" -v "FILENAME=ur5_harting_real_m1.launch" -v "ROSNODE=/ur5_manipulation":
 roslaunch,${MODULE2},-t moveit_planner -l -w 10 -g robot -L 2 -v "PACKAGE=fleximon_moveit_config" -v "FILENAME=ur5_harting_real.launch" -v "ROSNODE=/ur5_manipulation":
 ur5_microservice,${MODULE1},-l -w 10 -g robot -L 3 -v "SCOPE=/fleximon/module1/ur5":
 ur5_microservice,${MODULE2},-l -w 10 -g robot -L 3 -v "SCOPE=/fleximon/module1/ur5":
