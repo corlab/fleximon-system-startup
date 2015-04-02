@@ -29,14 +29,14 @@ export SPREAD_CONFIG="$prefix/etc/vdemo_scripts/data/spread.conf"
 
 export VDEMO_components="
 spreaddaemon,${MASTER},-l -w 10 -c -g base -L 0:
-roscore,${MODULE1},-l -w 10 -c -g robot -L 0:
-roscore,${MODULE2},-l -w 10 -c -g robot -L 0:
-roslaunch,${MODULE1},-t ur5_driver -l -w 10 -c -g robot -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m1.launch" -v "ROSNODE=/ur_driver":
-roslaunch,${MODULE2},-t ur5_driver -l -w 10 -c -g robot -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m2.launch" -v "ROSNODE=/ur_driver":
-roslaunch,${MODULE1},-t moveit_planner -l -w 10 -c -g robot -L 2 -v "PACKAGE=fleximon_moveit_config_m1" -v "FILENAME=ur5_harting_real_m1.launch" -v "ROSNODE=/move_group" -x:
-roslaunch,${MODULE2},-t moveit_planner -l -w 10 -c -g robot -L 2 -v "PACKAGE=fleximon_moveit_config" -v "FILENAME=ur5_harting_real.launch" -v "ROSNODE=/move_group" -x:
-ur5_microservice,${MODULE1},-l -w 10 -g robot -L 3 -v "SCOPE=/fleximon/module1/ur5":
-ur5_microservice,${MODULE2},-l -w 10 -g robot -L 3 -v "SCOPE=/fleximon/module2/ur5":
+roscore,${MODULE1},-l -w 10 -c -g base -L 0:
+roscore,${MODULE2},-l -w 10 -c -g base -L 0:
+roslaunch,${MODULE1},-t ur5_driver -l -w 10 -c -g robot-m1 -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m1.launch" -v "ROSNODE=/ur_driver":
+roslaunch,${MODULE2},-t ur5_driver -l -w 10 -c -g robot-m2 -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m2.launch" -v "ROSNODE=/ur_driver":
+roslaunch,${MODULE1},-t moveit_planner -l -w 10 -c -g robot-m1 -L 2 -v "PACKAGE=fleximon_moveit_config_m1" -v "FILENAME=ur5_harting_real_m1.launch" -v "ROSNODE=/move_group" -x:
+roslaunch,${MODULE2},-t moveit_planner -l -w 10 -c -g robot-m2 -L 2 -v "PACKAGE=fleximon_moveit_config" -v "FILENAME=ur5_harting_real.launch" -v "ROSNODE=/move_group" -x:
+ur5_microservice,${MODULE1},-l -w 10 -g robot-m1 -L 3 -v "SCOPE=/fleximon/module1/ur5":
+ur5_microservice,${MODULE2},-l -w 10 -g robot-m2 -L 3 -v "SCOPE=/fleximon/module2/ur5":
 teachin_app,${MASTER},-n -l -w 10 -g tools -x -L 1:
 rsblogger,${MASTER},-t logger_monitor -v "STYLE=monitor" -n -w 1 -d -1 -g tools -L 1:
 rsblogger,${MASTER},-t logger_timeline -v "STYLE=timeline/scope" -n -w 1 -d -1 -g tools -L 1:
