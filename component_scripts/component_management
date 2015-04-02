@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function component {
+    /home/fleximon/git/fleximon-erp-integrator/fleximon.management/target/appassembler/bin/fleximon-management --sapinterface FILEIO --sapinterfaceurl /home/fleximon/orders/
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

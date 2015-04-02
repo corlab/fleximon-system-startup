@@ -1,0 +1,10 @@
+#!/bin/bash
+
+: ${CONFIG:="unknown"}
+export CONFIG
+
+function component {
+    /home/fleximon/git/fleximon-coordination/target/dist/bin/fleximon-coordination $CONFIG
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

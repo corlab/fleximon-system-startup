@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function component {
+	R CMD Rserve
+	sleep 5
+   /home/fleximon/git/fleximon-monitor/fleximon-monitor/target/appassembler/bin/fleximon-monitor /home/fleximon/git/fleximon-monitor/fleximon-monitor/src/main/config/process.signature
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

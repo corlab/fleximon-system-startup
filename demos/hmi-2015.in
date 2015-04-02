@@ -37,7 +37,14 @@ roslaunch,${MODULE1},-t moveit_planner -l -w 10 -c -g robot-m1 -L 2 -v "PACKAGE=
 roslaunch,${MODULE2},-t moveit_planner -l -w 10 -c -g robot-m2 -L 2 -v "PACKAGE=fleximon_moveit_config" -v "FILENAME=ur5_harting_real.launch" -v "ROSNODE=/move_group" -x:
 ur5_microservice,${MODULE1},-l -w 10 -g robot-m1 -L 3 -v "SCOPE=/fleximon/module1/ur5":
 ur5_microservice,${MODULE2},-l -w 10 -g robot-m2 -L 3 -v "SCOPE=/fleximon/module2/ur5":
+coordination,${MASTER},-t coordination_line -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/line.xml":
+coordination,${MASTER},-t coordination_module1 -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/module1.xml":
+coordination,${MASTER},-t coordination_module2 -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/module2.xml":
+coordination,${MASTER},-t coordination_module3 -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/module3.xml":
+management,${MASTER},-l -w 10 -g management -L 4:
+node_server,${MASTER},-l -w 10 -g base -L 0:
+fleximon_monitor,${MASTER},-l -w 15 -g viz -L 1:
 teachin_app,${MASTER},-n -l -w 10 -g tools -x -L 1:
 rsblogger,${MASTER},-t logger_monitor -v "STYLE=monitor" -n -w 1 -d -1 -g tools -L 1:
-rsblogger,${MASTER},-t logger_timeline -v "STYLE=timeline/scope" -n -w 1 -d -1 -g tools -L 1:
+rsblogger,${MASTER},-t logger_timeline -v "STYLE=timeline/scope" -n -w 2 -d -1 -g tools -L 1:
 "
