@@ -1,7 +1,13 @@
 #!/bin/bash
 
 function component {
-    /home/fleximon/git/fleximon-erp-integrator/fleximon.management/target/appassembler/bin/fleximon-management --sapinterface FILEIO --sapinterfaceurl /home/fleximon/orders/
+    : ${MODE:="production"}
+	if [ "$MODE" = "test" ]
+	then
+        /home/fleximon/git/fleximon-erp-integrator/fleximon.management/target/appassembler/bin/fleximon-management --sapinterface FILEIO --sapinterfaceurl /home/fleximon/orders/
+	else
+        /home/fleximon/git/fleximon-erp-integrator/fleximon.management/target/appassembler/bin/fleximon-management
+	fi
 }
 
 source "$VDEMO_root/vdemo_standard_component_suffix.sh"

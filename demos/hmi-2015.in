@@ -40,7 +40,8 @@ coordination,${MASTER},-t coordination_line -l -w 10 -g coordination -L 4 -v "CO
 coordination,${MASTER},-t coordination_module1 -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/module1.xml":
 coordination,${MASTER},-t coordination_module2 -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/module2.xml":
 coordination,${MASTER},-t coordination_module3 -l -w 10 -g coordination -L 4 -v "CONFIG=/home/fleximon/share/module3.xml":
-management,${MASTER},-l -w 10 -g management -L 4:
+management,${MASTER},-t management_demo -n -l -w 10 -g management -L 4 -v "MODE=test":
+management,${MASTER},-n -l -w 10 -g management -L 4:
 node_server,${MASTER},-l -w 10 -g base -L 0:
 fleximon_monitor,${MASTER},-l -w 15 -g viz -L 1:
 teachin_app,${MASTER},-n -l -w 10 -g tools -x -L 1:
