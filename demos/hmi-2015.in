@@ -28,7 +28,6 @@ export SPREAD_PORT=4803
 export SPREAD_CONFIG="$prefix/etc/vdemo_scripts/data/spread.conf"
 
 export VDEMO_components="
-spreaddaemon,${MASTER},-l -w 10 -c -g base -L 0:
 roscore,${MODULE1},-l -w 10 -c -g robot-m1 -L 0:
 roscore,${MODULE2},-l -w 10 -c -g robot-m2 -L 0:
 roslaunch,${MODULE1},-t ur5_driver -l -w 10 -c -g robot-m1 -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m1.launch" -v "ROSNODE=/ur_driver":
