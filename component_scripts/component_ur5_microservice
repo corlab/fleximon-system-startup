@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function component {
+	: ${SCOPE:="/fleximon/modulexxx/ur5"}
+    source ~/catkin_ws/devel/setup.bash
+	ROS_MASTER_URI=http://localhost:11311
+	rosrun ur5_move rsb-ur5-microservice -s "${SCOPE}"
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

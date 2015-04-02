@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function component {
+    /opt/ros/indigo/bin/roscore
+}
+
+function on_check {
+    nc -w 1 -z 0.0.0.0 "11311"
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

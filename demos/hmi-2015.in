@@ -1,0 +1,47 @@
+export VDEMO_demoRoot="@vdemo_demoroot@"
+source "$VDEMO_demoRoot/vdemo_aux_functions.sh"
+
+##############################################################################
+# ENVIRONMENT
+##############################################################################
+
+export prefix=@prefix@
+export bindir="$prefix/bin"
+export sbindir="$prefix/sbin"
+export sysconfdir="$prefix/etc"
+export VDEMO_root="@vdemo_prefix@/lib/vdemo"
+export PATH="$bindir:$sbindir:$PATH"
+export PYTHONPATH="$prefix/lib/python2.7/site-packages/:$PYTHONPATH"
+
+export VDEMO_componentPath="$VDEMO_demoRoot/component_scripts"
+export VDEMO_logdir=$(vdemo_get_logdir)
+export VDEMO_logfile_prefix="$VDEMO_logdir/component_"
+export VDEMO_watchfile="$VDEMO_logdir/vdemo_watch.log"
+
+# Hosts
+export MASTER=localhost
+export MODULE1=fleximon-m1
+export MODULE2=fleximon-m2
+
+# RSB
+export SPREAD_PORT=4803
+export RSB_PLUGINS_CPP_LOAD=rsbspread
+export RSB_TRANSPORT_SPREAD_PORT=${SPREAD_PORT}
+export RSB_TRANSPORT_SPREAD_ENABLED=1
+export RSB_TRANSPORT_SOCKET_ENABLED=0
+export RSB_TRANSPORT_INPROCESS_ENABLED=0
+export SPREAD_CONFIG="$prefix/etc/vdemo_scripts/data/spread.conf"
+
+export VDEMO_components="
+spreaddaemon,${MASTER},-l -w 10 -c -g base -L 0:
+roscore,${MODULE1},-l -w 10 -c -g robot -L 0:
+roscore,${MODULE2},-l -w 10 -c -g robot -L 0:
+roslaunch,${MODULE1},-t ur5_driver -l -w 10 -g robot -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m1.launch" -v "ROSNODE=/ur_driver":
+roslaunch,${MODULE2},-t ur5_driver -l -w 10 -g robot -L 1 -v "PACKAGE=ur_bringup" -v "FILENAME=ur5_harting_m2.launch" -v "ROSNODE=/ur_driver":
+roslaunch,${MODULE1},-t moveit_planner -l -w 10 -g robot -L 2 -v "PACKAGE=fleximon_moveit_config_m1" -v "FILENAME=ur5_harting_real_m1.launch" -v "ROSNODE/ur5_manipulation":
+roslaunch,${MODULE2},-t moveit_planner -l -w 10 -g robot -L 2 -v "PACKAGE=fleximon_moveit_config" -v "FILENAME=ur5_harting_real.launch" -v "ROSNODE=/ur5_manipulation":
+ur5_microservice,${MODULE1},-l -w 10 -g robot -L 3 -v "SCOPE=/fleximon/module1/ur5":
+ur5_microservice,${MODULE2},-l -w 10 -g robot -L 3 -v "SCOPE=/fleximon/module1/ur5":
+rsblogger,${MASTER},-t logger_monitor -v "STYLE=monitor" -n -w 1 -d -1 -g tools -L 1:
+rsblogger,${MASTER},-t logger_timeline -v "STYLE=timeline/scope" -n -w 1 -d -1 -g tools -L 1:
+"

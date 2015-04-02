@@ -1,0 +1,22 @@
+#!/bin/bash
+
+: ${PACKAGE:="unknown"}
+export PACKAGE
+: ${FILENAME:="unknown"}
+export FILENAME
+: ${ROSNODE:="unknown"}
+export ROSNODE
+
+source ~/catkin_ws/devel/setup.bash
+
+export ROS_MASTER_URI=http://localhost:11311
+
+function component {
+    roslaunch "${PACKAGE}" "${FILENAME}"
+}
+
+function on_check {
+    rosnode list | grep "${ROSNODE}" >/dev/null 2>/dev/null
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

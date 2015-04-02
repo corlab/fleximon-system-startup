@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function component {
+	: ${STYLE:="monitor"}
+	rsb-loggercl0.11 --style="${STYLE}" spread:/
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"

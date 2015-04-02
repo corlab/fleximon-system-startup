@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function component {
+    spread -c $SPREAD_CONFIG
+}
+
+function on_check {
+	nc -w 1 -z 0.0.0.0 "$SPREAD_PORT"
+}
+
+function on_start {
+    [ -f "$SPREAD_CONFIG" ]
+}
+
+function on_stop {
+    rm -f /tmp/${SPREAD_PORT:-4803}
+}
+
+source "$VDEMO_root/vdemo_standard_component_suffix.sh"
