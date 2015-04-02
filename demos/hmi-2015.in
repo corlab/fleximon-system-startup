@@ -25,11 +25,6 @@ export MODULE2=fleximon-m2
 
 # RSB
 export SPREAD_PORT=4803
-export RSB_PLUGINS_CPP_LOAD=rsbspread
-export RSB_TRANSPORT_SPREAD_PORT=${SPREAD_PORT}
-export RSB_TRANSPORT_SPREAD_ENABLED=1
-export RSB_TRANSPORT_SOCKET_ENABLED=0
-export RSB_TRANSPORT_INPROCESS_ENABLED=0
 export SPREAD_CONFIG="$prefix/etc/vdemo_scripts/data/spread.conf"
 
 export VDEMO_components="
